@@ -621,6 +621,29 @@
     \end{singlespace}
 }
 
+% BAB YANG HANYA ADA DI TESIS
+\newcommand{\inputChapter}[1]{%
+    \cleardoublepage
+    \phantomsection
+    \include{#1}%
+}
+
+\newcommand{\thesisContent}[1]{%
+    \iftoggle{tesis}{%
+        #1%
+    }{%
+        % Bab ini tidak ada
+    }%
+}
+
+\newcommand{\proposalContent}[1]{%
+    \iftoggle{proposaltesis}{%
+        #1%
+    }{%
+        % Kosong: Jika mode tesis, kode di sini diabaikan
+    }%
+}
+
 %======================================
 %% Table of Contents
 %% List of Figures and Tables

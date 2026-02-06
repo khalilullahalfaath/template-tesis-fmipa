@@ -140,18 +140,24 @@
 \startmain
 % You can change 
 %    the filename and location of the files inputted
-\cleardoublepage \phantomsection
-\include{contents/chapter-1/chapter-1}
-\cleardoublepage \phantomsection
-\include{contents/chapter-2/chapter-2}
-\cleardoublepage \phantomsection
-\include{contents/chapter-3/chapter-3}
-\cleardoublepage \phantomsection
-\include{contents/chapter-4/chapter-4}
-\cleardoublepage \phantomsection
-\include{contents/chapter-5/chapter-5}
-\cleardoublepage \phantomsection
-\include{contents/chapter-6/chapter-6}
+% --- Bab 1 s.d 4 ---
+\inputChapter{contents/chapter-1/chapter-1}
+\inputChapter{contents/chapter-2/chapter-2}
+\inputChapter{contents/chapter-3/chapter-3}
+\inputChapter{contents/chapter-4/chapter-4}
+
+\proposalContent{
+    \inputChapter{contents/chapter-5/chapter-5-proposal}
+}
+
+% --- Bab 5 s.d Selesai ---
+\thesisContent{
+    \inputChapter{contents/chapter-5/chapter-5}
+    \inputChapter{contents/chapter-6/chapter-6}
+    \inputChapter{contents/chapter-7/chapter-7}
+}
+
+
 
 %======================================
 
@@ -159,7 +165,6 @@
 %  References
 %======================================
 \cleardoublepage \phantomsection
-\thereferences
 \printbibliography[heading=bibintoc]
 
 %Hapus bagian di bawah setelah tidak diperlukan
