@@ -28,6 +28,7 @@
 \RequirePackage{graphicx}
 \RequirePackage{calc}%Simple arithmetic lib
 \RequirePackage{pdfpages} %include pdf file in latex
+\RequirePackage{pgffor} %iterative counter
 %\RequirePackage{titlesec}
 
 % Folder packages
@@ -448,20 +449,14 @@
                         \vspace{\dimexpr 12pt * 2 * 150 / 100\relax}
 
                         Pembimbing\\
-
-                        \vspace{\dimexpr 12pt * 3 * 150 / 100\relax}
-
-                        \getsupervisor{1}{1}\\
-                        Pembimbing I
-
-                        \ifdefempty{\@secondsupervisor}
-                        {
-                        }
-                        {
-                            \vspace{\dimexpr 12pt * 3 * 150 / 100\relax}
-
-                            \getsupervisor{2}{1} \\
-                            Pembimbing II
+						
+						\newcounter{tmp}
+                        \foreach \i in {1,...,\value{spv}}{%
+                        	\setcounter{tmp}{\i}
+                        	 \vspace{\dimexpr 12pt * 3 * 150 / 100\relax}
+                        	
+                        	\getsupervisor{\i}{1} \\
+                        	Pembimbing \Roman{tmp}
                         }
 
                     \end{singlespace}
