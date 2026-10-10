@@ -70,6 +70,9 @@
 \printcover{sample/logougm.png}{Bachelor}
 % *Choose one
 
+%---- TITLE PAGE (sama dengan sampul + kalimat "Diajukan untuk memenuhi...") ----
+\printtitlepage{sample/logougm.png}
+
 %---- ENDORSEMENT PAGE ----
 % Select endorsement page type. If you want to use your own PDF file,  
 % 	use \printendorsementpdf, or if you want to use JPG file, use 
@@ -81,18 +84,18 @@
 %\printendorsementpdf
 %\printendorsementjpg{sample/scanned-endorsement.jpg}
 
-%---- OPTIONAL: STATEMENT PAGE (uncomment if needed) ----
-% \cleardoublepage \phantomsection
-% \chapterstatement{contents/statement/statement}
+%---- STATEMENT PAGE (tesis saja; otomatis kosong untuk proposal) ----
+\cleardoublepage \phantomsection
+\chapterstatement{contents/statement/statement}
 %\chapterstatementjpg{sample/scanned-statement.jpg}
 
 %---- OPTIONAL: DEDICATION PAGE (uncomment if needed) ----
 % \cleardoublepage \phantomsection
 % \chapterdedication{contents/dedication/dedication}
 
-%---- OPTIONAL: PREFACE PAGE (uncomment if needed) ----
-% \cleardoublepage \phantomsection
-% \chapterpreface{contents/preface/preface}
+%---- PREFACE PAGE / PRAKATA (tesis saja; otomatis kosong untuk proposal) ----
+\cleardoublepage \phantomsection
+\chapterpreface{contents/preface/preface}
 
 %======================================
 % Create Table of Contents, List of Figures, List of Tables
@@ -100,7 +103,6 @@
 %======================================
 \cleardoublepage \phantomsection
 \thetoc
-\onehalfspacing
 \tableofcontents
 \singlespacing
 \cleardoublepage \phantomsection

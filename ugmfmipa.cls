@@ -121,13 +121,13 @@
 \usepackage{enumitem}
 \usepackage{tabularx}
 \usepackage[
-    labelsep=period,
+    labelsep=space,
     font=singlespacing,
     figurewithin=none,
     tablewithin=none
-]{caption} % period separator, single spacing
+]{caption} % space separator, single spacing
 \captionsetup[table]{font={bf,singlespacing}} % bold only for tables
-\captionsetup[figure]{font=singlespacing} % normal font for figures
+\captionsetup[figure]{font={bf,singlespacing}} % bold for figures
 \usepackage{subcaption} % subfigure support
 % \usepackage[bookmarks=true,hidelinks,bookmarksnumbered]{hyperref}
 \usepackage{tikz}
@@ -170,7 +170,7 @@
 
 % redefine commands in babel bahasa
 \addto\captionsbahasa{%
-    \renewcommand{\prefacename}{KATA PENGANTAR}%
+    \renewcommand{\prefacename}{PRAKATA}%
     \renewcommand{\contentsname}{DAFTAR ISI}%
     \renewcommand{\listfigurename}{DAFTAR GAMBAR}%
     \renewcommand{\listtablename}{DAFTAR TABEL}%
@@ -294,77 +294,54 @@
 %======================================
 %% Cover Page
 %======================================
-% if tesis
-\iftoggle{tesis}{
-    \newcommand{\printcover}[2]{
-        \newgeometry{left=3cm,top=3cm,bottom=3cm,right=3cm}
-        \thispagestyle{empty}%
-        \setcounter{page}{1}
-        \pagenumbering{roman}
-        \begin{center}
-            \begin{onehalfspacing}
-                \MakeUppercase{\normalfont\bfseries\@titleind}\\
-                \vspace{0.5em}
-                {\normalfont\itshape\@titleeng}\\
-                \vspace{1cm}
-                \vfill
-                \includegraphics[width=5.5cm]{#1}
-                \vfill
-                \iftoggle{lang}
-                {\normalfont\bfseries Oleh:}
-                {\normalfont\bfseries By:}\\\vspace{0.4em}
-                \MakeUppercase{\normalfont\bfseries\@authorName \\ \@authorID \\}
-                \vspace{1cm}
-                \vfill
-                \vspace{0.4em}
-                \textbf{
-                    \iftoggle{lang}{\MakeUppercase{Program Studi \@prodiIna}}{\MakeUppercase{\@prodiEng Program}} \\
-                    \iftoggle{lang}{\MakeUppercase{\@jurusanIna}}{\MakeUppercase{\@jurusanEng}} \\
-                    \iftoggle{lang}{\MakeUppercase{\@facultyIna}}{\MakeUppercase{\@facultyEng}} \\
-                    \MakeUppercase{\@university} \\
-                    \MakeUppercase{\@city} \\
-                    \@yearsubmit
-                }
-            \end{onehalfspacing}
-        \end{center}
-    }
+% #1 = logo, #2 = optional note under the logo (empty for cover)
+\newcommand{\@coverpage}[2]{
+    \newgeometry{left=3cm,top=3cm,bottom=3cm,right=3cm}
+    \thispagestyle{empty}%
+    \begin{center}
+        \begin{onehalfspacing}
+            \iftoggle{proposaltesis}{%
+                \MakeUppercase{\normalfont\bfseries \iftoggle{lang}{Proposal Tesis}{Thesis Proposal}}\\
+                \vspace{1.5cm}}{}%
+            \MakeUppercase{\normalfont\bfseries\@titleind}\\
+            \vspace{0.5em}
+            {\normalfont\itshape\@titleeng}\\
+            \vspace{1cm}
+            \vfill
+            \includegraphics[width=5.5cm]{#1}
+            \vfill
+            \ifblank{#2}{}{#2\par\vspace{1em}}%
+            \iftoggle{lang}
+            {\normalfont\bfseries Oleh:}
+            {\normalfont\bfseries By:}\\\vspace{0.4em}
+            \MakeUppercase{\normalfont\bfseries\@authorName \\ \@authorID \\}
+            \vspace{1cm}
+            \vfill
+            \vspace{0.4em}
+            \textbf{
+                \iftoggle{lang}{\MakeUppercase{Program Studi \@prodiIna}}{\MakeUppercase{\@prodiEng Program}} \\
+                \iftoggle{lang}{\MakeUppercase{\@jurusanIna}}{\MakeUppercase{\@jurusanEng}} \\
+                \iftoggle{lang}{\MakeUppercase{\@facultyIna}}{\MakeUppercase{\@facultyEng}} \\
+                \MakeUppercase{\@university} \\
+                \MakeUppercase{\@city} \\
+                \@yearsubmit
+            }
+        \end{onehalfspacing}
+    \end{center}
 }
 
-\iftoggle{proposaltesis}{
-    \newcommand{\printcover}[2]{
-        \newgeometry{left=3cm,top=3cm,bottom=3cm,right=3cm}
-        \thispagestyle{empty}%
-        \setcounter{page}{1}
-        \pagenumbering{roman}
-        \begin{center}
-            \begin{onehalfspacing}
-                \MakeUppercase{\normalfont\bfseries \iftoggle{lang}{Proposal Tesis}{Thesis Proposal}}\\
-                \vspace{1.5cm}
-                \MakeUppercase{\normalfont\bfseries\@titleind}\\
-                \vspace{0.5em}
-                {\normalfont\itshape\@titleeng}\\
-                \vspace{1cm}
-                \vfill
-                \includegraphics[width=5.5cm]{#1}
-                \vfill
-                \iftoggle{lang}
-                {\normalfont\bfseries Oleh:}
-                {\normalfont\bfseries By:}\\\vspace{0.4em}
-                \MakeUppercase{\normalfont\bfseries\@authorName \\ \@authorID \\}
-                \vspace{1cm}
-                \vfill
-                \vspace{0.4em}
-                \textbf{
-                    \iftoggle{lang}{\MakeUppercase{Program Studi \@prodiIna}}{\MakeUppercase{\@prodiEng Program}} \\
-                    \iftoggle{lang}{\MakeUppercase{\@jurusanIna}}{\MakeUppercase{\@jurusanEng}} \\
-                    \iftoggle{lang}{\MakeUppercase{\@facultyIna}}{\MakeUppercase{\@facultyEng}} \\
-                    \MakeUppercase{\@university} \\
-                    \MakeUppercase{\@city} \\
-                    \@yearsubmit
-                }
-            \end{onehalfspacing}
-        \end{center}
-    }
+\newcommand{\printcover}[2]{%
+    \setcounter{page}{1}
+    \pagenumbering{roman}
+    \@coverpage{#1}{}%
+}
+
+% Halaman judul: sama dengan sampul + kalimat pemenuhan syarat (Panduan 2.1.1)
+\newcommand{\printtitlepage}[1]{%
+    \newpage
+    \@coverpage{#1}{\iftoggle{lang}
+        {Diajukan untuk memenuhi salah satu syarat memperoleh derajat \@prodiIna}
+        {Submitted in partial fulfillment of the requirements for the degree of \@prodiEng}}%
 }
 
 %======================================
@@ -783,7 +760,7 @@
     \renewcommand{\headrulewidth}{0pt}
     \renewcommand{\footrulewidth}{0pt}
     \pagestyle{fancy}
-    \setlength{\parindent}{1.25cm}
+    \setlength{\parindent}{1.27cm}
 }
 
 % Configure plain style for chapter first pages
@@ -812,6 +789,10 @@
 {\ifnum \c@chapter>\z@ \@arabic\c@chapter.\fi \@arabic\c@figure}
 \renewcommand \thetable
 {\ifnum \c@chapter>\z@ \@arabic\c@chapter.\fi \@arabic\c@table}
+\@addtoreset {algorithm}{chapter}
+\renewcommand \thealgorithm
+{\ifnum \c@chapter>\z@ \@arabic\c@chapter.\fi \@arabic\c@algorithm}
+\floatname{algorithm}{\iftoggle{lang}{Algoritma}{Algorithm}}
 
 % Section style
 
@@ -839,7 +820,7 @@
     \renewcommand{\headrulewidth}{0pt}
     \onehalfspacing
     \nopagebreak
-    \setlength{\parindent}{1.25cm}
+    \setlength{\parindent}{1.27cm}
 }
 
 

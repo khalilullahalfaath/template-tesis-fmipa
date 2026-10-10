@@ -32,7 +32,7 @@
 % Override string English agar sesuai format FMIPA UGM terbaru.
 \DefineBibliographyStrings{english}{%
     andothers = {\mkbibemph{et\addabbrvspace al\adddot}},%
-    and       = {\&},%
+    and       = {dan},%
     pages     = {},%
     page      = {},%
     edition   = {edisi ke},%
@@ -41,6 +41,16 @@
 
 % Format DOI: tampilkan sebagai "doi: https://doi.org/..."
 \DeclareFieldFormat{doi}{doi:\space\url{https://doi.org/#1}}
+
+% Panduan 2.2.10/3.3.2: setiap pustaka wajib punya DOI atau link.
+% Entri yang dicetak tanpa doi dan url memicu peringatan saat kompilasi.
+% (ganti \PackageWarning dengan \PackageError agar build berhenti)
+\AtEveryBibitem{%
+    \iffieldundef{doi}
+    {\iffieldundef{url}
+        {\PackageWarning{fmipabib}{Entri '\thefield{entrykey}' tidak punya DOI atau URL}}
+        {}}
+    {}}
 
 % Format edisi: "edisi ke 2" bukan "2nd ed."
 \DeclareFieldFormat{edition}{edisi ke\space#1}
@@ -73,6 +83,20 @@
         \setunit{\addcomma\space}%
     }{}%
 }
+% Tahun sudah dicetak oleh makro author/begentry di atas. Kosongkan date+extradate
+% agar entri tanpa penulis tidak mencetak tahun kedua "(1992)" setelah judul.
+\renewbibmacro*{date+extradate}{}
+
+% Urutan daftar pustaka: nama belakang penulis pertama; tanpa penulis diurutkan sebagai "Anonim"
+\DeclareSortingTemplate{nyt}{
+    \sort{\field{presort}}
+    \sort[final]{\field{sortkey}}
+    \sort{\name{sortname}\name{author}\name{editor}\name{translator}\literal{Anonim}}
+    \sort{\field{sortyear}\field{year}\literal{9999}}
+    \sort{\field{sorttitle}\field{title}}
+    \sort{\field{volume}\literal{0000}}
+}
+
 \DeclareDelimFormat[bib]{nameyeardelim}{\addcomma\space}
 \DeclareDelimFormat{nameyeardelim}{\addcomma\space}
 
@@ -94,15 +118,19 @@
 \DeclareFieldFormat[inproceedings]{title}{#1}
 
 % 4. Skripsi/Tesis/Disertasi: Tipe dokumen Miring
-\DeclareFieldFormat[thesis]{title}{#1}
-\DeclareFieldFormat[thesis]{type}{\mkbibemph{#1}}
+\DeclareFieldFormat[thesis]{title}{\mkbibemph{#1}}
+\DeclareFieldFormat[thesis]{type}{#1}
 
 % 5. Artikel dalam Buku: Judul Artikel Miring & Judul Buku Miring
 \DeclareFieldFormat[incollection]{title}{\mkbibemph{#1}}
 \DeclareFieldFormat[incollection]{booktitle}{\mkbibemph{#1}}
 
 % 6. Internet: URL Miring
-\DeclareFieldFormat{url}{\mkbibemph{#1}}
+\DeclareFieldFormat{url}{\mkbibemph{\url{#1}}}
+% Izinkan URL panjang dipenggal di antara huruf/angka agar tidak melewati margin
+\setcounter{biburlnumpenalty}{100}
+\setcounter{biburlucpenalty}{100}
+\setcounter{biburllcpenalty}{100}
 \DeclareFieldFormat{urldate}{diakses tanggal #1}
 
 % 7. Laporan Penelitian: Tipe Miring
