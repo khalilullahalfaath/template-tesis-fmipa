@@ -772,12 +772,14 @@
 }
 
 % depth of toc
-\setcounter{secnumdepth}{2}
+\setcounter{secnumdepth}{3}
 % set numbering style
 \renewcommand \thepart {\@Roman\c@part}
 \renewcommand \thechapter {\@Roman\c@chapter}
 \renewcommand \thesection {\@arabic\c@chapter.\@arabic\c@section}
 \renewcommand\thesubsection {\@arabic\c@chapter.\@arabic\c@section.\@arabic\c@subsection}
+% turunan dari \thesubsection agar ikut awalan "L." di lampiran
+\renewcommand\thesubsubsection {\thesubsection.\@arabic\c@subsubsection}
 
 % set figure, table, and equation style
 \@addtoreset {equation}{chapter}
@@ -807,7 +809,7 @@
 {\thesubsection}{1em}{}
 \titleformat{\subsubsection}
 {\raggedright\normalfont\normalsize\bfseries\singlespacing}
-{}{0em}{}
+{\thesubsubsection}{1em}{}
 
 
 % Starting the main matter	
