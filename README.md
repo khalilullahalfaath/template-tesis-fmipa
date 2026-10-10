@@ -144,7 +144,7 @@ template-tesis-fmipa/
 | **Judul Bab** | Bold, 14pt, kapital, center, nomor Romawi besar |
 | **Judul Section** | Bold, 12pt, Title Case, nomor Arab (1.1) |
 | **Judul Subsection** | Bold, 12pt, sentence case, nomor Arab (1.1.1) |
-| **Subsubsection** | Bold, 12pt, nomor Arab (1.1.1.1) |
+| **Subsubsection** | Bold, 12pt, tanpa nomor |
 | **Tabel** | Caption bold di atas, tanpa titik setelah nomor, nomor per bab (Tabel 4.1) |
 | **Gambar** | Caption bold di bawah, tanpa titik setelah nomor, nomor per bab (Gambar 3.1) |
 | **Algoritma** | Nomor per bab (Algoritma 3.1) |

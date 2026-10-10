@@ -13,7 +13,7 @@ File yang diperiksa: `ugmfmipa.cls`, `main.tex`, `packages/fmipabib.sty`, strukt
 | Times 12 pt | `\RequirePackage{times}`, `\LoadClass[12pt]` |
 | Spasi 1,5 isi; spasi 1 untuk intisari, abstract, caption, daftar pustaka | `\startmain`, `\chapterintisari`, `caption[font=singlespacing]`, `fmipabib` |
 | Judul bab kapital, tebal, 14 pt, tengah, 4 cm dari atas, Romawi | `\@makechapterhead` |
-| Sub bab tebal; anak sub bab bernomor | `\titleformat`, `secnumdepth=3` |
+| Sub bab tebal; anak sub bab tanpa nomor | `\titleformat`, `secnumdepth=2` |
 | Nomor sub bab, tabel, gambar, persamaan, definisi, dan teorema `bab.urut` | `\thesection`, `\thefigure`, `\theequation`, dst. |
 | Nomor halaman: awal Romawi bawah tengah; utama Arab kanan atas; judul bab bawah tengah | `\fancyfoot`, `\startmain`, `\fancypagestyle{plain}` |
 | Sampul: logo 5,5 cm, nama dan NIM, urutan institusi, tahun, judul dua bahasa | `\printcover` |
@@ -71,7 +71,3 @@ Perlu diingat bahwa halaman pengesahan (`\printendorsement`) bukan halaman judul
 - Gambar dan tabel dirujuk di teks sebelum muncul.
 - Isi halaman pengesahan proposal. Template memuat pembimbing saja, sedangkan panduan menyebut pembimbing dan penguji.
 - Kecocokan dengan `2026-Template Proposal Tesis.docx` dan `2026-Template Laporan Tesis.docx`.
-
-## Penyimpangan yang disengaja dari panduan
-
-- **Sub-sub bab bernomor** (`1.1.1.1`, `secnumdepth=3`). Panduan 2.2.6 butir 2d meminta bagian di bawah anak sub bab ditulis tanpa nomor dan tebal. Template mengikuti kebiasaan penulis manuskrip (permintaan pembimbing). Untuk kembali ke panduan: `secnumdepth` 2 dan format `\subsubsection` tanpa nomor di `ugmfmipa.cls`.
